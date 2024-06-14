@@ -30,6 +30,10 @@ registerPlugin(
         type: 'password',
         required: true,
       },
+      {
+        name: 'preTranslate',
+        type: 'boolean',
+      },
       // allow developer to override callback host , e.g ngrok for local development
       ...(appState.user.isBuilderAdmin
         ? [
@@ -37,10 +41,7 @@ registerPlugin(
               name: 'callbackHost',
               type: 'string',
             },
-            {
-              name: 'preTranslate',
-              type: 'boolean',
-            },
+           
             {
               name: 'apiHost',
               type: 'string',
@@ -85,6 +86,7 @@ registerPlugin(
               sourceLocale,
               ''
             );
+            console.log("l",lastPublishedContent)
             const currentRevision = hash(stringify(translatableFields), { encoding: 'base64' });
             appState.designerState.editingContentModel.meta.set(
               'translationRevisionLatest',
